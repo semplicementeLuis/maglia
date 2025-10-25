@@ -62,13 +62,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen overflow-x-hidden">
+    <div className="bg-gray-50 min-h-screen">
       <Header />
       <main>
         <section id="shop" className="py-12 sm:py-16 bg-white transition-all duration-500">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {selectedProduct ? (
                     <ProductDetailView 
+                      key={selectedProduct.id}
                       initialProduct={selectedProduct}
                       allProducts={AVAILABLE_PRODUCTS}
                       onClose={handleCloseDetailView} 

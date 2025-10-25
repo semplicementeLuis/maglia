@@ -65,17 +65,15 @@ const ProductDetailView: React.FC<ProductDetailViewProps> = ({ initialProduct, a
   const buttonBaseClass = "w-14 h-14 rounded-lg border flex items-center justify-center transition duration-300 font-mono font-bold text-lg flex-shrink-0 shadow-md transform hover:shadow-xl";
   
   return (
-    <div className="w-full animate-fade-in font-mono">
-      {/* Pulsante di chiusura per l'intera vista */}
-      <div className="relative w-full">
-          <button
-              onClick={onClose}
-              className="absolute top-0 right-0 text-gray-600 hover:text-black transition-colors z-30 -translate-y-8"
-              aria-label="Chiudi"
-          >
-              <XIcon className="w-10 h-10" />
-          </button>
-      </div>
+    <div className="w-full animate-fade-in font-mono relative">
+      {/* Pulsante di chiusura per DESKTOP */}
+      <button
+          onClick={onClose}
+          className="hidden lg:block absolute -top-4 -right-4 z-20 bg-white text-gray-500 rounded-full p-2 shadow-lg hover:bg-gray-100 hover:text-black transition-all duration-200"
+          aria-label="Chiudi"
+      >
+          <XIcon className="w-7 h-7" />
+      </button>
 
       {/* Sezione prodotto principale - Layout reattivo */}
       <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-center pb-20">
@@ -91,6 +89,14 @@ const ProductDetailView: React.FC<ProductDetailViewProps> = ({ initialProduct, a
         {/* Colonna 2: Card Prodotto e Azioni */}
         <div className="lg:col-start-2 flex flex-col items-center">
             <div className="relative w-full md:w-3/4 lg:w-full mx-auto">
+                {/* Pulsante di chiusura per MOBILE */}
+                <button
+                    onClick={onClose}
+                    className="lg:hidden absolute top-4 right-4 z-20 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition-all duration-200"
+                    aria-label="Chiudi"
+                >
+                    <XIcon className="w-6 h-6" />
+                </button>
                 <ProductCard 
                     product={selectedProduct}
                     onSelect={() => {}} 
