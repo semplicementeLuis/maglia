@@ -10,7 +10,7 @@ const VoteCard: React.FC<VoteCardProps> = ({ product, onVote }) => {
   const progressPercentage = (product.votes / product.goal) * 100;
 
   return (
-    <div className="font-mono text-center bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm flex flex-col">
+    <div className="font-mono text-center bg-white border border-gray-200 rounded-lg overflow-hidden shadow-xl flex flex-col transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
       <div className="relative">
         <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden">
           <img src={product.image} alt={product.name} className="w-full h-full object-cover" />

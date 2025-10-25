@@ -5,12 +5,12 @@ const Header: React.FC = () => {
   return (
     <header className="sticky top-0 bg-white bg-opacity-90 backdrop-blur-sm shadow-sm z-50 font-mono">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="relative flex items-center justify-between h-20">
           <a href="#" className="flex items-center space-x-2 text-2xl font-bold tracking-widest text-black">
             <TShirtSimpleIcon className="w-8 h-8" />
             <span>CHEROBA</span>
           </a>
-          <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wider uppercase">
+          <nav className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 space-x-8 text-sm font-semibold tracking-wider uppercase">
             <a href="#shop" className="text-gray-500 hover:text-black transition-colors duration-300">Shop</a>
             <a href="#vote" className="text-gray-500 hover:text-black transition-colors duration-300">Vota per Sbloccare</a>
             <a href="#about" className="text-gray-500 hover:text-black transition-colors duration-300">Chi Siamo</a>

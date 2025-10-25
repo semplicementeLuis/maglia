@@ -9,13 +9,13 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, isClickable = true }) => {
   const clickableClasses = isClickable
-    ? 'transform hover:-translate-y-1 hover:shadow-xl cursor-pointer'
+    ? 'transform hover:-translate-y-1 hover:shadow-2xl cursor-pointer'
     : '';
 
   return (
     <div 
       onClick={() => isClickable && onSelect(product)}
-      className={`group relative font-mono text-center bg-white border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 shadow-sm ${clickableClasses}`}
+      className={`group relative font-mono text-center bg-white border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 shadow-xl ${clickableClasses}`}
     >
       <div className="aspect-w-1 aspect-h-1 xl:aspect-w-4 xl:aspect-h-5 w-full overflow-hidden">
         <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
