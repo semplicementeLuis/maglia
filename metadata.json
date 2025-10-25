@@ -1,0 +1,5 @@
+{
+  "name": "Cheroba - Vota per Sbloccare",
+  "description": "A modern re-imagining of an e-commerce concept where the community votes to unlock new t-shirt designs. This React application features a clean, responsive interface for browsing products and participating in the voting process, built with TypeScript and Tailwind CSS.",
+  "requestFramePermissions": []
+}
