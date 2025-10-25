@@ -62,7 +62,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen overflow-x-hidden">
       <Header />
       <main>
         <section id="shop" className="py-12 sm:py-16 bg-white transition-all duration-500">
