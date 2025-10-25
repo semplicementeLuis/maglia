@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Header from './components/Header';
+import Header, { MobileMenu } from './components/Header';
 import ProductCard from './components/ProductCard';
 import VoteCard from './components/VoteCard';
 import About from './components/About';
@@ -17,6 +17,19 @@ const App: React.FC = () => {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const prevSelectedProductIdRef = useRef<number | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
+  useEffect(() => {
+    if (isMenuOpen) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'unset';
+    }
+    return () => {
+        document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
 
   useEffect(() => {
@@ -63,7 +76,7 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <Header />
+      <Header onMenuOpen={() => setIsMenuOpen(true)} />
       <main>
         <section id="shop" className="py-12 sm:py-16 bg-white transition-all duration-500">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -133,7 +146,7 @@ const App: React.FC = () => {
       </main>
       <Footer />
       {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
-
+      <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </div>
   );
 };

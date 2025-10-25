@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TShirtSimpleIcon, UserIcon, ShoppingCartIcon, MenuIcon, XIcon } from './Icons';
 
-const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+export const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
     const handleLinkClick = () => {
         onClose();
     };
@@ -14,7 +14,7 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
         } else {
             const timer = setTimeout(() => {
                 setIsRendered(false);
-            }, 300); // Corrisponde alla durata della transizione
+            }, 400); // Match animation duration
             return () => clearTimeout(timer);
         }
     }, [isOpen]);
@@ -30,10 +30,10 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
             aria-modal="true"
         >
             <div 
-                className={`absolute inset-0 bg-black transition-opacity duration-300 ease-in-out ${isOpen ? 'bg-opacity-50' : 'bg-opacity-0'}`}
+                className={`absolute inset-0 bg-black transition-opacity duration-400 ease-out ${isOpen ? 'bg-opacity-50' : 'bg-opacity-0'}`}
                 onClick={onClose}
             ></div>
-            <div className={`relative w-72 h-full bg-white ml-auto p-6 flex flex-col transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            <div className={`relative w-64 h-full bg-white ml-auto p-6 flex flex-col shadow-2xl transition-transform duration-400 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                 <button onClick={onClose} className="self-end mb-8 text-gray-500 hover:text-black">
                     <XIcon className="w-8 h-8" />
                 </button>
@@ -55,21 +55,11 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
     );
 };
 
+interface HeaderProps {
+    onMenuOpen: () => void;
+}
 
-const Header: React.FC = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    useEffect(() => {
-        if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [isMenuOpen]);
-
+const Header: React.FC<HeaderProps> = ({ onMenuOpen }) => {
     return (
         <header className="sticky top-0 bg-white bg-opacity-90 backdrop-blur-sm shadow-sm z-40 font-mono">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,13 +82,12 @@ const Header: React.FC = () => {
                         </a>
                     </div>
                     <div className="md:hidden">
-                        <button onClick={() => setIsMenuOpen(true)} className="text-gray-600 hover:text-black">
+                        <button onClick={onMenuOpen} className="text-gray-600 hover:text-black">
                             <MenuIcon className="w-8 h-8" />
                         </button>
                     </div>
                 </div>
             </div>
-            <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
         </header>
     );
 };
