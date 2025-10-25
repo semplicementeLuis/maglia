@@ -11,8 +11,8 @@ const Header: React.FC = () => {
             <span>CHEROBA</span>
           </a>
           <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wider uppercase">
-            <a href="#" className="text-gray-500 hover:text-black transition-colors duration-300">Shop</a>
-            <a href="#" className="text-black border-b-2 border-black pb-1">Vota per Sbloccare</a>
+            <a href="#shop" className="text-gray-500 hover:text-black transition-colors duration-300">Shop</a>
+            <a href="#vote" className="text-gray-500 hover:text-black transition-colors duration-300">Vota per Sbloccare</a>
             <a href="#about" className="text-gray-500 hover:text-black transition-colors duration-300">Chi Siamo</a>
           </nav>
           <div className="flex items-center space-x-4">

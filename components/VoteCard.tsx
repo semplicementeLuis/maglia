@@ -35,8 +35,11 @@ const VoteCard: React.FC<VoteCardProps> = ({ product, onVote }) => {
         </div>
         <button
           onClick={() => onVote(product.id)}
-          disabled={product.voted}
-          className="w-full max-w-xs mx-auto bg-black text-white font-semibold uppercase tracking-wider py-3 px-4 border border-black transition-colors duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-white hover:text-black"
+          className={`w-full max-w-xs mx-auto font-semibold uppercase tracking-wider py-3 px-4 border transition-colors duration-300 ${
+            product.voted
+              ? 'bg-white text-black border-black hover:bg-gray-100'
+              : 'bg-black text-white border-black hover:bg-white hover:text-black'
+          }`}
         >
           {product.voted ? 'Votato!' : 'Vota Ora'}
         </button>

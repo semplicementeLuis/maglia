@@ -8,37 +8,46 @@ import ComingSoonCard from './components/ComingSoonCard';
 import { AVAILABLE_PRODUCTS, VOTABLE_PRODUCTS } from './constants';
 import { VotableProduct } from './types';
 import { ChevronDownIcon } from './components/Icons';
+import Toast from './components/Toast';
 
 const App: React.FC = () => {
   const [votableProducts, setVotableProducts] = useState<VotableProduct[]>(VOTABLE_PRODUCTS);
   const [showAll, setShowAll] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleVote = (productId: number) => {
     setVotableProducts(prevProducts =>
-      prevProducts.map(p =>
-        p.id === productId && !p.voted
-          ? { ...p, votes: p.votes + 1, voted: true }
-          : p
-      )
+      prevProducts.map(p => {
+        if (p.id === productId) {
+          return p.voted
+            ? { ...p, votes: p.votes - 1, voted: false } // Rimuovi voto
+            : { ...p, votes: p.votes + 1, voted: true }; // Aggiungi voto
+        }
+        return p;
+      })
     );
+  };
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
   };
 
   return (
     <div className="bg-gray-50 min-h-screen">
       <Header />
       <main>
-        <section className="py-16 sm:py-24 bg-white">
+        <section id="shop" className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-center text-3xl font-bold tracking-widest uppercase text-black font-mono mb-12">Prodotti Disponibili</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {AVAILABLE_PRODUCTS.map(product => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard key={product.id} product={product} onShowToast={showToast} />
                     ))}
                 </div>
             </div>
         </section>
 
-        <section className="py-16 sm:py-24 bg-gray-50">
+        <section id="vote" className="py-16 sm:py-24 bg-gray-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 font-mono">
               <h2 className="text-3xl font-bold tracking-widest uppercase text-black">Sblocca le Prossime Patch</h2>
@@ -81,6 +90,7 @@ const App: React.FC = () => {
         <About />
       </main>
       <Footer />
+      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
     </div>
   );
 };
