@@ -7,6 +7,12 @@ export const AVAILABLE_PRODUCTS: Product[] = [
     country: 'Italia',
     price: '€ 29,90',
     image: 'https://i.postimg.cc/J471xTgR/italia.png',
+    description: 'Celebra la cultura e lo stile italiano con questa T-shirt premium. Realizzata in cotone 100%, presenta una patch finemente ricamata della bandiera italiana sul cuore. Vestibilità classica per un comfort che dura tutto il giorno.',
+    gallery: [
+      'https://i.postimg.cc/J471xTgR/italia.png',
+      'https://i.postimg.cc/Y0NHyZzQ/tshirt-details-1.png',
+      'https://i.postimg.cc/P5tM0G3g/tshirt-details-2.png',
+    ],
   },
   {
     id: 2,
@@ -14,6 +20,12 @@ export const AVAILABLE_PRODUCTS: Product[] = [
     country: 'Giappone',
     price: '€ 29,90',
     image: 'https://i.postimg.cc/ZKYTHfgZ/giappone.png',
+    description: 'Immergiti nell\'eleganza minimalista del Giappone. Questa T-shirt in cotone di alta qualità è adornata con la patch del Sol Levante, simbolo di tradizione e modernità. Perfetta per un look sofisticato e di tendenza.',
+     gallery: [
+      'https://i.postimg.cc/ZKYTHfgZ/giappone.png',
+      'https://i.postimg.cc/Y0NHyZzQ/tshirt-details-1.png',
+      'https://i.postimg.cc/P5tM0G3g/tshirt-details-2.png',
+    ],
   },
   {
     id: 3,
@@ -21,6 +33,12 @@ export const AVAILABLE_PRODUCTS: Product[] = [
     country: 'USA',
     price: '€ 29,90',
     image: 'https://i.postimg.cc/zXDJ7dMh/usa.png',
+    description: 'Indossa lo spirito audace e intramontabile degli Stati Uniti. La patch "Stars and Stripes" è ricamata su una T-shirt in cotone morbido e resistente, ideale per un look casual e iconico. Un classico che non passa mai di moda.',
+     gallery: [
+      'https://i.postimg.cc/zXDJ7dMh/usa.png',
+      'https://i.postimg.cc/Y0NHyZzQ/tshirt-details-1.png',
+      'https://i.postimg.cc/P5tM0G3g/tshirt-details-2.png',
+    ],
   },
 ];
 
@@ -34,6 +52,8 @@ export const VOTABLE_PRODUCTS: VotableProduct[] = [
     votes: 109,
     goal: 500,
     voted: false,
+    description: '',
+    gallery: [],
   },
   {
     id: 5,
@@ -44,6 +64,8 @@ export const VOTABLE_PRODUCTS: VotableProduct[] = [
     votes: 25,
     goal: 500,
     voted: false,
+    description: '',
+    gallery: [],
   },
   {
     id: 6,
@@ -54,5 +76,7 @@ export const VOTABLE_PRODUCTS: VotableProduct[] = [
     votes: 2,
     goal: 500,
     voted: false,
+    description: '',
+    gallery: [],
   },
 ];

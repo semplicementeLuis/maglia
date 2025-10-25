@@ -5,8 +5,9 @@ import VoteCard from './components/VoteCard';
 import About from './components/About';
 import Footer from './components/Footer';
 import ComingSoonCard from './components/ComingSoonCard';
+import ProductDetailView from './components/ProductDetailView';
 import { AVAILABLE_PRODUCTS, VOTABLE_PRODUCTS } from './constants';
-import { VotableProduct } from './types';
+import { VotableProduct, Product } from './types';
 import { ChevronDownIcon } from './components/Icons';
 import Toast from './components/Toast';
 
@@ -14,18 +15,28 @@ const App: React.FC = () => {
   const [votableProducts, setVotableProducts] = useState<VotableProduct[]>(VOTABLE_PRODUCTS);
   const [showAll, setShowAll] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
 
   const handleVote = (productId: number) => {
     setVotableProducts(prevProducts =>
       prevProducts.map(p => {
         if (p.id === productId) {
           return p.voted
-            ? { ...p, votes: p.votes - 1, voted: false } // Rimuovi voto
-            : { ...p, votes: p.votes + 1, voted: true }; // Aggiungi voto
+            ? { ...p, votes: p.votes - 1, voted: false }
+            : { ...p, votes: p.votes + 1, voted: true };
         }
         return p;
       })
     );
+  };
+
+  const handleProductSelect = (product: Product) => {
+    setSelectedProduct(product);
+  };
+
+  const handleCloseDetailView = () => {
+    setSelectedProduct(null);
   };
 
   const showToast = (message: string) => {
@@ -36,14 +47,26 @@ const App: React.FC = () => {
     <div className="bg-gray-50 min-h-screen">
       <Header />
       <main>
-        <section id="shop" className="py-16 sm:py-24 bg-white">
+        <section id="shop" className="py-12 sm:py-16 bg-white transition-all duration-500">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-center text-3xl font-bold tracking-widest uppercase text-black font-mono mb-12">Prodotti Disponibili</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {AVAILABLE_PRODUCTS.map(product => (
-                        <ProductCard key={product.id} product={product} onShowToast={showToast} />
-                    ))}
-                </div>
+                {selectedProduct ? (
+                    <ProductDetailView 
+                      initialProduct={selectedProduct}
+                      allProducts={AVAILABLE_PRODUCTS}
+                      onClose={handleCloseDetailView} 
+                      onShowToast={showToast} 
+                      onSelectProduct={handleProductSelect}
+                    />
+                ) : (
+                    <>
+                        <h2 className="text-center text-3xl font-bold tracking-widest uppercase text-black font-mono mb-12">Prodotti Disponibili</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {AVAILABLE_PRODUCTS.map(product => (
+                                <ProductCard key={product.id} product={product} onSelect={handleProductSelect} />
+                            ))}
+                        </div>
+                    </>
+                )}
             </div>
         </section>
 
@@ -91,6 +114,7 @@ const App: React.FC = () => {
       </main>
       <Footer />
       {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
+
     </div>
   );
 };

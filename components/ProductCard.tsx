@@ -3,16 +3,20 @@ import { Product } from '../types';
 
 interface ProductCardProps {
   product: Product;
-  onShowToast: (message: string) => void;
+  onSelect: (product: Product) => void;
+  isClickable?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onShowToast }) => {
-  const handleUnavailableOption = () => {
-    onShowToast('Opzione non ancora disponibile');
-  };
+const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, isClickable = true }) => {
+  const clickableClasses = isClickable
+    ? 'transform hover:-translate-y-1 hover:shadow-xl cursor-pointer'
+    : '';
 
   return (
-    <div className="group relative font-mono text-center bg-white border border-gray-200 rounded-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-xl">
+    <div 
+      onClick={() => isClickable && onSelect(product)}
+      className={`group relative font-mono text-center bg-white border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 shadow-sm ${clickableClasses}`}
+    >
       <div className="aspect-w-1 aspect-h-1 xl:aspect-w-4 xl:aspect-h-5 w-full overflow-hidden">
         <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
       </div>
@@ -20,21 +24,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onShowToast }) => {
         <h3 className="text-sm font-bold tracking-widest uppercase text-black">{product.name}</h3>
         <p className="mt-2 text-lg text-gray-700">{product.price}</p>
       </div>
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center space-y-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6">
-        <button
-          type="button"
-          onClick={handleUnavailableOption}
-          className="w-full max-w-xs bg-white text-black font-semibold uppercase tracking-wider py-3 px-4 border border-transparent hover:bg-black hover:text-white hover:border-white transition-colors duration-300"
-        >
-          Acquista
-        </button>
-        <button
-          type="button"
-          onClick={handleUnavailableOption}
-          className="w-full max-w-xs bg-transparent text-white font-semibold uppercase tracking-wider py-3 px-4 border border-white hover:bg-white hover:text-black transition-colors duration-300"
-        >
-          Personalizza
-        </button>
+      <div className={`absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 transition-opacity duration-300 ${isClickable ? 'group-hover:opacity-100' : ''}`}>
+        <span className={`text-white text-4xl font-bold uppercase tracking-widest drop-shadow-lg transition-transform duration-300 ${isClickable ? 'group-hover:scale-110' : ''}`}>
+          {product.country}
+        </span>
       </div>
     </div>
   );

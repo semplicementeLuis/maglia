@@ -4,6 +4,8 @@ export interface Product {
   country: string;
   price: string;
   image: string;
+  description: string;
+  gallery: string[];
 }
 
 export interface VotableProduct extends Product {

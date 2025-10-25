@@ -23,7 +23,7 @@ const Toast: React.FC<ToastProps> = ({ message, duration = 3000, onClose }) => {
 
   return (
     <div
-      className={`fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white font-mono text-sm py-2 px-5 rounded-full shadow-lg z-50 transition-all duration-300 ease-in-out ${
+      className={`fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white font-mono text-sm py-2 px-5 rounded-full shadow-lg z-[60] transition-all duration-300 ease-in-out ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
       role="alert"
