@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header, { MobileMenu } from './components/Header';
 import ProductCard from './components/ProductCard';
 import VoteCard from './components/VoteCard';
@@ -16,7 +16,6 @@ const App: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const prevSelectedProductIdRef = useRef<number | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
@@ -33,19 +32,13 @@ const App: React.FC = () => {
 
 
   useEffect(() => {
+    // When a product is selected (either for the first time or switching),
+    // scroll the page to the top to ensure the product detail view is visible.
     if (selectedProduct) {
-        // If we are showing a product detail view
-        if (prevSelectedProductIdRef.current !== null && prevSelectedProductIdRef.current !== selectedProduct.id) {
-            // And we were previously showing a different product detail view, scroll up.
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        prevSelectedProductIdRef.current = selectedProduct.id;
-    } else {
-        // We are not in a detail view, reset the ref.
-        prevSelectedProductIdRef.current = null;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
   }, [selectedProduct]);
 

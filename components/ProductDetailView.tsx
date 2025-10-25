@@ -120,7 +120,7 @@ const ProductDetailView: React.FC<ProductDetailViewProps> = ({ initialProduct, a
                     <button
                         ref={infoButtonRef}
                         onClick={() => setShowInfo(!showInfo)}
-                        className={`${buttonBaseClass} -translate-y-2 hover:-translate-y-3 ${showInfo ? 'bg-black text-white border-black border-2' : 'bg-white text-black border-gray-300 hover:border-black hover:border-2'}`}
+                        className={`${buttonBaseClass} -translate-y-2 hover:-translate-y-3 ${showInfo ? 'bg-black text-white border-transparent' : 'bg-white text-black border-gray-300'}`}
                         aria-label="Informazioni sul prodotto"
                         aria-expanded={showInfo}
                     >
@@ -136,8 +136,8 @@ const ProductDetailView: React.FC<ProductDetailViewProps> = ({ initialProduct, a
                             onClick={() => setSelectedSize(prevSize => prevSize === size ? null : size)}
                             className={`${buttonBaseClass} hover:-translate-y-1 ${
                             selectedSize === size
-                                ? 'bg-black text-white border-black border-2'
-                                : 'bg-white text-black border-gray-300 hover:border-black hover:border-2'
+                                ? 'bg-black text-white border-transparent'
+                                : 'bg-white text-black border-gray-300'
                             }`}
                         >
                             {size}
@@ -149,7 +149,7 @@ const ProductDetailView: React.FC<ProductDetailViewProps> = ({ initialProduct, a
                 <div className="px-6 sm:px-8">
                     <button
                         onClick={handleAddToCart}
-                        className={`${buttonBaseClass} bg-white text-black border-gray-300 hover:border-black hover:border-2 -translate-y-2 hover:-translate-y-3`}
+                        className={`${buttonBaseClass} bg-white text-black border-gray-300 -translate-y-2 hover:-translate-y-3`}
                         aria-label="Aggiungi al Carrello"
                     >
                         <ShoppingCartIcon className="w-7 h-7" />
